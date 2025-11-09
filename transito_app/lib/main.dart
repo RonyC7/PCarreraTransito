@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'pages/login_page.dart';
+import 'pages/admin_page.dart';
+import 'pages/agente_page.dart';
+import 'pages/ciudadano_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,42 +30,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const LoginPage(),
+        '/admin': (context) =>  AdminPage(),
+        '/agente': (context) =>  AgentePage(),
+        '/ciudadano': (context) =>  CiudadanoPage(),
+      },
     );
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  Future<void> _testSupabaseConnection(BuildContext context) async {
-    try {
-      final supabase = Supabase.instance.client;
-      final data = await supabase.from('roles').select();
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('conexion exitosa con supabase')),
-      );
-      debugPrint('Datos de roles: $data');
-    } catch (e) {
-      ScaffoldMessenger.of (context).showSnackBar(
-        SnackBar(content: Text('Error: $e')),
-      );
-    }
-  }
-  
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text('Conexion a supabase'),
-    ),
-    body: Center(
-      child: ElevatedButton.icon(
-        icon: const Icon(Icons.cloud_done_outlined),
-        label: const Text('Probar conexion con la base de datos'),
-        onPressed: () => _testSupabaseConnection(context),
-      ),
-    ),
-  );
-}
-}
