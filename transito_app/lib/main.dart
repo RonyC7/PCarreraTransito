@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
         '/admin': (context) => const AdminPage(),
         '/agente': (context) => const AgentePage(),
         '/ciudadano': (context) => const CiudadanoPage(),
+        '/home': (context) => const DashboardPage(),
       },
     );
   }

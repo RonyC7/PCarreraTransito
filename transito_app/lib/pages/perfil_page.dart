@@ -121,7 +121,7 @@ class _PerfilPageState extends State<PerfilPage> {
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green[700],
+                            backgroundColor: Colors.blue[700],
                             foregroundColor: Colors.white,
                           ),
                           onPressed: () => Navigator.push(
